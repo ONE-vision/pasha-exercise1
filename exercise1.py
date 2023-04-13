@@ -30,14 +30,11 @@ class PetManager:
         return list of animal objects, if "species"or "gender" are specified - return only
         animals with specified parameters
         """
-        animals=self.zoo
-        if species:
-            animals=list(filter(lambda x: x.species==species, animals))
+        animals=list(filter(lambda x: x.species==species or species == None, self.zoo))
         
-        if gender:
-            animals=list(filter(lambda x: x.gender==gender, animals))
+        result=list(filter(lambda x: x.gender_male==gender or gender == None, animals))
 
-        return animals
+        return result
         # result = []
         # print (self.zoo)
         # Your code here
@@ -117,7 +114,17 @@ while True:
 
     if command == Commands.list:
         # al=mgr.list_animals(species != None) - Trying to insert values to method_list, but it doesn't work now.
-        al=mgr.list_animals()
+        g=input("Gender (M/F, empty for all)")# .strip()
+        # g M, F, ""
+        #True = M, False = F, None = ""
+        #gm= ....... 
+        print(f"DEBUG: gm={gm}")
+        sp=input("Species (empty for all): ")
+        sp=sp if sp != "" else None
+        print(f"DEBUG: sp={sp}")
+        
+        
+        al=mgr.list_animals(gender=gm, species=sp)
         print(al)
     if command == Commands.exit:
         print("Goodbye!")
