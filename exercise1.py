@@ -41,8 +41,14 @@ class PetManager:
         # return result
 
     def get_animal(self, id: int = None, name: str = None) -> Animal:
-        result=list(filter(lambda x: x.id == id, self.zoo))
-        return result
+        if id != None:
+            result=list(filter(lambda x: x.id == id, self.zoo))
+            
+    
+        if str != None:
+            result=list(filter(lambda x: x.name == name, self.zoo))
+
+            return result
 
         """for i in self.zoo:   
             if i == id:
