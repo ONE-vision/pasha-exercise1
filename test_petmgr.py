@@ -3,9 +3,7 @@ import pytest
 from exercise1 import PetManager
 from modules.datamodel import Animal
 
-def test_init():
-    t=PetManager()
-    assert type(t) == PetManager
+
 
 @pytest.fixture()
 def populated_petmanager():
@@ -19,6 +17,13 @@ def populated_petmanager():
         t.add_animal(Animal(*a))
     return t
 
+## General
+def test_init():
+    t=PetManager()
+    assert type(t) == PetManager
+    
+### list_animals
+    
 def test_list_no_filters(populated_petmanager):
     l=populated_petmanager.list_animals()
     assert len(l)==4
@@ -26,3 +31,33 @@ def test_list_no_filters(populated_petmanager):
     assert set(ids) == set([1,2,3,4])
     for a in l:
         assert type(a) == Animal
+        
+def test_list_empty():
+    mgr=PetManager()
+    l=mgr.list_animals()
+    assert l==[]
+    
+### add_animal
+    
+def test_add_good_animal(populated_petmanager):
+    a=Animal(10,True,"a10", "dog")
+    assert populated_petmanager.add_animal(a) 
+    l=populated_petmanager.list_animals() 
+    assert len(l)==5
+    assert l[4].name=="a10"
+    assert sum([x.id==10 for x in l]) == 1
+    
+def test_add_dup_id(populated_petmanager):
+    a=Animal(1,True, "asdf", "dog")
+    assert populated_petmanager.add_animal(a) == False 
+    assert len(populated_petmanager.list_animals())==4
+    
+def test_add_bad_species(populated_petmanager):
+    a=Animal(66,False,"asdf", "gyraffe")
+    assert populated_petmanager.add_animal(a) == False 
+    assert len(populated_petmanager.list_animals())==4
+    
+    
+### get_animal
+
+### delete_animal    

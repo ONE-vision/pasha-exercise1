@@ -6,29 +6,27 @@ class PetManager:
     def __init__(self) -> None:
         self.zoo = []
 
-    def _validate(self, animal: Animal) -> Result:
+    def _validate(self, animal: Animal) -> bool:
         """check if we can accept this animal.
         Checks:
             1. species is "dog" or "cat"
             2. id is unique
         """
-        result = Result()
         existing_ids = set(map(lambda x: x.id, self.zoo))
         if animal.id in existing_ids:
-            result.success = False
-            result.message = "Duplicate ID"
-        return result
+            return False
+        return True
 
-    def add_animal(self, animal: Animal) -> Result:
-        result = self._validate(animal)
-        if result.success:
+    def add_animal(self, animal: Animal) -> bool:
+        if  self._validate(animal):
             self.zoo.append(animal)
-        return result
+            return True
+        return False
 
     def list_animals(self, species: str = None, gender: bool = None) -> List[Animal]:
         """
         return list of animal objects, if "species"or "gender" are specified - return only
-        animals with specified parameters
+        animals with specified parameters. If none found = return an empty array.
         """
         animals=list(filter(lambda x: x.species==species or species == None, self.zoo))
         
