@@ -41,6 +41,15 @@ class PetManager:
         # return result
 
     def get_animal(self, id: int = None, name: str = None) -> Animal:
+        result=list(filter(lambda x: x.id == id, self.zoo))
+        return result
+
+        """for i in self.zoo:   
+            if i == id:
+                print("YES")
+            else:
+                print("NO")"""
+        
         """
         Return requested animal and search result.
 
@@ -50,7 +59,7 @@ class PetManager:
         have this name - fail.
         The method should return object of type Animal if search was successful or None.
         """
-        return result
+        # return result
 
     def delete_animal(self, deleted: int) -> Result:
         self.zoo=list(filter(lambda x: x.id != deleted, self.zoo))
@@ -134,3 +143,9 @@ while True:
         id_to_delete=int(input())
         de=mgr.delete_animal(id_to_delete)
         print(de)
+
+    if command == Commands.search:
+        id_to_search=int(input("Inpui ID: "))
+        name_to_search=str(input("Input Name: "))
+        se=mgr.get_animal(id_to_search, name_to_search)
+        print(se)
