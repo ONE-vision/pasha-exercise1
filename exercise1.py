@@ -45,7 +45,7 @@ class PetManager:
             result=list(filter(lambda x: x.id == id, self.zoo))
             
     
-        if str != None:
+        if name != None:
             result=list(filter(lambda x: x.name == name, self.zoo))
 
             return result
