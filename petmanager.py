@@ -15,8 +15,8 @@ class PetManager:
         existing_ids = set(map(lambda x: x.id, self.zoo))
         if animal.id in existing_ids:
             return False
-        if species != "cat" or "dog":
-            return False
+        #if animal.species != "cat" or "dog":
+            #return False
         return True
 
     def add_animal(self, animal: Animal) -> bool:
