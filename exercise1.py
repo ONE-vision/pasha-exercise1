@@ -124,6 +124,7 @@ if __name__ == "__main__":
             else:
                 print(f"Error: {result.message}")
 
+
     if command == Commands.list:
         # al=mgr.list_animals(species != None) - Trying to insert values to method_list, but it doesn't work now.
         g=input("Gender (M/F, empty for all)")# .strip()
@@ -153,3 +154,4 @@ if __name__ == "__main__":
         name_to_search=str(input("Input Name: "))
         se=mgr.get_animal(id_to_search, name_to_search)
         print(se)
+
