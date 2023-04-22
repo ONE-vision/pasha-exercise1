@@ -41,7 +41,7 @@ def test_list_empty():
     
 def test_add_good_animal(populated_petmanager):
     a=Animal(10,True,"a10", "dog")
-    assert populated_petmanager.add_animal(a) 
+    populated_petmanager.add_animal(a) 
     l=populated_petmanager.list_animals() 
     assert len(l)==5
     assert l[4].name=="a10"
@@ -49,13 +49,13 @@ def test_add_good_animal(populated_petmanager):
     
 def test_add_dup_id(populated_petmanager):
     a=Animal(1,True, "asdf", "dog")
-    assert populated_petmanager.add_animal(a) == False 
-    assert len(populated_petmanager.list_animals())==4
+    with pytest.raises(Exception):
+        assert populated_petmanager.add_animal(a) 
     
 def test_add_bad_species(populated_petmanager):
     a=Animal(66,False,"asdf", "gyraffe")
-    assert populated_petmanager.add_animal(a) == False 
-    assert len(populated_petmanager.list_animals())==4
+    with pytest.raises(AssertionError):
+        populated_petmanager.add_animal(a)
     
     
 ### get_animal

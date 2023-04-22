@@ -12,21 +12,20 @@ class PetManager:
             1. species is "dog" or "cat"
             2. id is unique
         """
-        existing_ids = set(map(lambda x: x.id, self.zoo))
+
+        existing_ids =list(map(lambda x: x.id, self.zoo))
+        assert type(animal.id) == int, "ID not int" 
+        assert type(animal.name) == str , "Name not string"
+        assert "fuck" not in animal.name.lower() , "fucking animals not allowed"
+        assert type(animal.gender_male) == bool ,"Gender not bool"
         if animal.id in existing_ids: 
-            return False
+            raise ValueError("Duplicate id")
+        assert animal.species in ['cat', 'dog'], "only cats or dogs"
 
-        """err_species = set(map(lambda x: x.species, self.zoo))
-        if err_species != "cat" or "dog":
-            return False"""
 
-        return True
-
-    def add_animal(self, animal: Animal) -> bool:
-        if  self._validate(animal):
-            self.zoo.append(animal)
-            return True
-        return False
+    def add_animal(self, animal: Animal):
+        self._validate(animal)
+        self.zoo.append(animal)
 
     def list_animals(self, species: str = None, gender: bool = None) -> List[Animal]:
         """
@@ -75,92 +74,5 @@ class PetManager:
         return self.zoo
         """
         Delete from the list the animal with given id, if found.
-        Return Result object with success=True if the animal deleted, else with success=False
+        Return True if success, false if not
         """
-
-
-class Commands:
-    add = 1
-    search = 2
-    list = 3
-    delete = 4
-    exit = 5
-
-
-if __name__ == "__main__":
-    print("Starting Pet Manager")
-    mgr = PetManager()
-
-    menu = """
-    1) add animal
-    2) search for animal
-    3) lsit all animals
-    4) delete an animal
-    5) exit
-    """
-
-    w = """Welcome to Pet manager! Please, choose command:
-    1 - add animal;
-    2 - search for an animal;
-    3 - list all animals;
-    4 - delete an animal;
-    5 - exit
-    Enjoy!"""
-
-    print(w)
-
-    while True:
-        c = input("Enter command: ")
-        try:
-            command = int(c)
-        except ValueError:
-            print("Invalid command")
-            command = 0
-        if command == Commands.add:
-            id = int(input("ID: "))
-            name = input("NAME: ")
-            g = input("Gender (M/F): ")
-            gender_male = g == "M"
-            species = input("Species: ")
-            animal = Animal(id, gender_male, name, species)
-            result = mgr.add_animal(animal)
-            if result.success:
-                print("OK")
-            else:
-                print(f"Error: {result.message}") 
-    
-        if command == Commands.add:
-            id_to_search=int(input("Input ID: "))
-            name_to_search=str(input("Input name: "))
-            se=mgr.get_animal(id_to_search, name_to_search)
-            print(se)
-
-    if command == Commands.list:
-        # al=mgr.list_animals(species != None) - Trying to insert values to method_list, but it doesn't work now.
-        g=input("Gender (M/F, empty for all)")# .strip()
-        # g M, F, ""
-        #True = M, False = F, None = ""
-        #gm= ....... 
-        print(f"DEBUG: gm={gm}")
-        sp=input("Species (empty for all): ")
-        sp=sp if sp != "" else None
-        print(f"DEBUG: sp={sp}")
-        
-        
-        al=mgr.list_animals(gender=gm, species=sp)
-        print(al)
-    if command == Commands.exit:
-        print("Goodbye!")
-        quit()
-    # Other commands here
-    if command == Commands.delete:
-        print ("Input ID:")
-        id_to_delete=int(input())
-        de=mgr.delete_animal(id_to_delete)
-        print(de)
-
-    if command == Commands.search:
-        id_to_search=int(input("Inpui ID: "))
-        name_to_search=str(input("Input Name: "))
-        se=mgr.get_animal(id_to_search, name_to_search)
-        print(se)
