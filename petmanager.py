@@ -13,10 +13,13 @@ class PetManager:
             2. id is unique
         """
         existing_ids = set(map(lambda x: x.id, self.zoo))
-        if animal.id in existing_ids:
+        if animal.id in existing_ids: 
             return False
-        #if animal.species != "cat" or "dog":
-            #return False
+
+        """err_species = set(map(lambda x: x.species, self.zoo))
+        if err_species != "cat" or "dog":
+            return False"""
+
         return True
 
     def add_animal(self, animal: Animal) -> bool:
@@ -124,7 +127,13 @@ if __name__ == "__main__":
             if result.success:
                 print("OK")
             else:
-                print(f"Error: {result.message}")
+                print(f"Error: {result.message}") 
+    
+        if command == Commands.add:
+            id_to_search=int(input("Input ID: "))
+            name_to_search=str(input("Input name: "))
+            se=mgr.get_animal(id_to_search, name_to_search)
+            print(se)
 
     if command == Commands.list:
         # al=mgr.list_animals(species != None) - Trying to insert values to method_list, but it doesn't work now.
