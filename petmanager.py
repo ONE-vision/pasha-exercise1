@@ -63,7 +63,7 @@ class PetManager:
         if name != None:
             result=list(filter(lambda x: x.name == name, self.zoo))
 
-            return(list[0])
+            return result[0]
         
         """
         Return requested animal and search result.

@@ -60,6 +60,20 @@ def test_add_bad_species(populated_petmanager):
     
 ### get_animal
 
+def test_get_existing_animal(populated_petmanager):
+    id: int = 1
+    name: str = "Name1"
+    a1=populated_petmanager.get_animal(id, None)
+    assert type(a1) == Animal 
+    assert a1.id==id and a1.name == name
+    a2=populated_petmanager.get_animal(None, name)
+    assert a2==a1
+    a3=populated_petmanager.get_animal(id, name)
+    assert a3==a1
+    assert populated_petmanager.get_animal(id,"BadName") == False
+    assert populated_petmanager.get_animal(999,name) == False
+    assert populated_petmanager.get_animal(999,"Badname") == False
+
 ### delete_animal    
 def test_delete_animal(populated_petmanager):
     d: int = 1
