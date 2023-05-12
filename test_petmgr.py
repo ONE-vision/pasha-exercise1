@@ -61,3 +61,10 @@ def test_add_bad_species(populated_petmanager):
 ### get_animal
 
 ### delete_animal    
+def test_delete_animal(populated_petmanager):
+    d: int = 1
+    assert populated_petmanager.delete_animal(d) == True
+    l=populated_petmanager.list_animals()
+    assert len(l)==3
+    ids=[x.id for x in l]
+    assert set(ids) == set([2,3,4])
