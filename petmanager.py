@@ -67,7 +67,7 @@ class PetManager:
         logger.debug("Get animal")
         
         
-        if id != None:
+        if id != None and name == None:
             result=list(filter(lambda x: x.id == id, self.zoo))
             if not result: 
                 return False
@@ -99,7 +99,7 @@ class Commands:
     exit = 5
 
 
-if __name__ == "__main__":
+if __name__ == "X__main__":
     print("Starting Pet Manager")
     mgr = PetManager()
 

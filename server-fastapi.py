@@ -1,16 +1,16 @@
 from fastapi import FastAPI
 
 from modules.datamodel import Animal
-
+from petmanager import PetManager
 
 app = FastAPI()
 app.mgr=PetManager()
 
 @app.get("/api/v1/list")
 async def list():
-    return app.mgr.list()
+    return app.mgr.list_animals()
 
-@app.create('/api/v1/add')
+@app.post('/api/v1/add')
 async def create(animal: Animal):
     return app.mgr.add_animal(animal)
 
