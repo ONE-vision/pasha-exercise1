@@ -55,16 +55,6 @@ class PetManager:
         # return result
 
     def get_animal(self, id: int = None, name: str = None) -> Animal:
-        logger.debug("Get animal")
-        if id != None:
-            result=list(filter(lambda x: x.id == id, self.zoo))
-            
-    
-        if name != None:
-            result=list(filter(lambda x: x.name == name, self.zoo))
-
-            return result[0]
-        
         """
         Return requested animal and search result.
 
@@ -73,8 +63,20 @@ class PetManager:
         if only name is given - return the only animal with this name. If more then 1 animals
         have this name - fail.
         The method should return object of type Animal if search was successful or None.
-        """
-        # return result
+        """ 
+        logger.debug("Get animal")
+        
+        
+        if id != None:
+            result=list(filter(lambda x: x.id == id, self.zoo))
+            if not result: 
+                return False
+    
+        if name != None:
+            result=list(filter(lambda x: x.name == name, self.zoo))
+
+        return result[0] if result else False
+        
 
     def delete_animal(self, deleted: int) -> bool:
         orig_len=len(self.zoo)

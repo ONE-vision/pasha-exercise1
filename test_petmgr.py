@@ -61,8 +61,8 @@ def test_add_bad_species(populated_petmanager):
 ### get_animal
 
 def test_get_existing_animal(populated_petmanager):
-    id: int = 1
-    name: str = "Name1"
+    id = 1
+    name = "Name1"
     a1=populated_petmanager.get_animal(id, None)
     assert type(a1) == Animal 
     assert a1.id==id and a1.name == name
