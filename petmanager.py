@@ -74,6 +74,13 @@ class PetManager:
     
         if name != None:
             result=list(filter(lambda x: x.name == name, self.zoo))
+            if not result:
+                return False
+        
+        if id == None and name != None:
+            result=list(filter(lambda x: x.name == name, self.zoo))
+            if not result: 
+                return False
 
         return result[0] if result else False
         
