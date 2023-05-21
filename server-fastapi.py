@@ -14,6 +14,14 @@ async def list():
 async def create(animal: Animal):
     return app.mgr.add_animal(animal)
 
+@app.delete('/api/v1/delete')
+async def delete(id: int):
+    return app.mgr.delete_animal(bool)
+
+"""@app.search('/api/v1/search')
+async def search(id, name):
+    return app.mgr.get_animal(animal)"""
+
 # To run:
 #pip install uvicorn
 #uvicorn server-fastapi:app

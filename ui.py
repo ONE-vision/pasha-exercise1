@@ -16,3 +16,9 @@ logging.info(p.text)
 l=requests.get(URL+"/list")
 res=l.json()
 logging.debug(f"get: {res}")
+
+"""d=requests.delete(URL+"/delete",json=id_to_delete)
+logging.debug(f"delete: {res}")
+
+s=requests.search(URL+"/search",json=id_to_search)
+logging.debug(f"search: {res}")"""
